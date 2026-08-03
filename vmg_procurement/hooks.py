@@ -5,6 +5,25 @@ app_description = "Custom procurement system for VMG: non-stock purchase cycle a
 app_email = "saaspurchases@acube.co"
 app_license = "mit"
 
+# Fixtures
+# --------
+# Mandatory rule 7: every Custom Field, Property Setter, Workflow, Role and
+# Print Format created for this build is exported with
+# `bench --site <site> export-fixtures` and version controlled inside this app.
+# Filters scope the export to VMG Procurement records only, so records owned by
+# other apps on this bench are never touched.
+# Workflow State / Workflow Action Master filters will be added in step 03 when
+# the first workflow is created.
+fixtures = [
+	{"dt": "Custom Field", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "Property Setter", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "Client Script", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "Server Script", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "Print Format", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "Role", "filters": [["name", "like", "VMG %"]]},
+	{"dt": "Workflow", "filters": [["document_type", "like", "VMG %"]]},
+]
+
 # Apps
 # ------------------
 
