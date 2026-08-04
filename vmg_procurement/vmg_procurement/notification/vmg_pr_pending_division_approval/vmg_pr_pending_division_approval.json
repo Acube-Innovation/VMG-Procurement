@@ -1,0 +1,29 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "doc.workflow_state == \"Pending Division Approval\"",
+ "creation": "2026-08-03 16:00:00.000000",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "VMG Purchase Requisition",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<p>Purchase Requisition <b>{{ doc.name }}</b> ({{ doc.division }}) is now <b>{{ doc.workflow_state }}</b>.</p>\n<ul>\n    <li>Requisition Type: {{ doc.requisition_type }}</li>\n    <li>Required By: {{ frappe.utils.formatdate(doc.required_by_date) }}</li>\n    <li>Total Estimated Value: AED {{ frappe.utils.fmt_money(doc.total_estimated_value) }}</li>\n    <li>Requested By: {{ doc.requested_by }}</li>\n{% if doc.is_emergency %}    <li><b style=\"color: #b00\">EMERGENCY{% if doc.emergency_reference %}: {{ doc.emergency_reference }}{% endif %}</b></li>\n{% endif %}{% if doc.workflow_state == \"Rejected\" and doc.rejection_reason %}    <li>Rejection Reason: {{ doc.rejection_reason }}</li>\n{% endif %}</ul>\n<p><a href=\"{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}\">Open {{ doc.name }}</a></p>\n",
+ "modified": "2026-08-03 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG PR Pending Division Approval",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "VMG Division Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "{%if doc.is_emergency%}EMERGENCY {%endif%}{{doc.name}} | {{doc.division}} | AED {{doc.total_estimated_value}} | {{doc.workflow_state}}",
+ "value_changed": "workflow_state"
+}

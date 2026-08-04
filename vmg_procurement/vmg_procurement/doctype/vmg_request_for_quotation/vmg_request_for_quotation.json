@@ -1,0 +1,283 @@
+{
+ "actions": [],
+ "creation": "2026-08-03 18:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "transaction_date",
+  "purchase_requisition",
+  "division",
+  "required_by_date",
+  "column_break_details",
+  "project",
+  "cost_center",
+  "rfq_subject",
+  "message_section",
+  "message_to_supplier",
+  "suppliers_section",
+  "suppliers",
+  "items_section",
+  "items",
+  "value_section",
+  "estimated_value",
+  "is_new_product_or_service",
+  "column_break_value",
+  "required_supplier_count",
+  "threshold_note",
+  "status_section",
+  "status",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Transaction Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "purchase_requisition",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Purchase Requisition",
+   "options": "VMG Purchase Requisition",
+   "read_only_depends_on": "eval:doc.purchase_requisition",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "purchase_requisition.division",
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "read_only": 1
+  },
+  {
+   "fieldname": "required_by_date",
+   "fieldtype": "Date",
+   "label": "Required By Date"
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "purchase_requisition.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "purchase_requisition.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "default": "Request for Quotation",
+   "fieldname": "rfq_subject",
+   "fieldtype": "Data",
+   "label": "RFQ Subject"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "message_section",
+   "fieldtype": "Section Break",
+   "label": "Message to Supplier"
+  },
+  {
+   "fieldname": "message_to_supplier",
+   "fieldtype": "Text Editor",
+   "label": "Message to Supplier"
+  },
+  {
+   "fieldname": "suppliers_section",
+   "fieldtype": "Section Break",
+   "label": "Suppliers"
+  },
+  {
+   "fieldname": "suppliers",
+   "fieldtype": "Table",
+   "label": "Suppliers",
+   "options": "VMG RFQ Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG RFQ Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "value_section",
+   "fieldtype": "Section Break",
+   "label": "Value and Quotation Rules"
+  },
+  {
+   "fetch_from": "purchase_requisition.total_estimated_value",
+   "fieldname": "estimated_value",
+   "fieldtype": "Currency",
+   "label": "Estimated Value (AED)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fetch_from": "purchase_requisition.is_new_product_or_service",
+   "fieldname": "is_new_product_or_service",
+   "fieldtype": "Check",
+   "label": "Is New Product or Service",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_value",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "required_supplier_count",
+   "fieldtype": "Int",
+   "label": "Required Supplier Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "threshold_note",
+   "fieldtype": "Small Text",
+   "label": "Threshold Note",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nSent to Suppliers\nQuotations Received\nComparison Created\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG Request for Quotation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-06 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Request for Quotation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG CFO"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG General Manager"
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User"
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "purchase_requisition,division,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

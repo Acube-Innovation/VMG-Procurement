@@ -12,16 +12,72 @@ app_license = "mit"
 # `bench --site <site> export-fixtures` and version controlled inside this app.
 # Filters scope the export to VMG Procurement records only, so records owned by
 # other apps on this bench are never touched.
+# Note: fixture sync never overwrites a record the client has modified after
+# the export (frappe skips docs whose DB timestamp is newer than the file's),
+# so seeded masters like VMG Division stay client-editable.
 # Workflow State / Workflow Action Master filters will be added in step 03 when
 # the first workflow is created.
 fixtures = [
-	{"dt": "Custom Field", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "Role", "filters": [["name", "like", "VMG %"]]},
+	{
+		"dt": "Custom Field",
+		"filters": [
+			[
+				"dt",
+				"in",
+				[
+					"Supplier",
+					"Material Request",
+					"Material Request Item",
+					"Supplier Quotation",
+					"Supplier Quotation Item",
+					"Purchase Order",
+					"Purchase Order Item",
+					"Purchase Receipt",
+					"Purchase Receipt Item",
+					"Purchase Invoice",
+					"Purchase Invoice Item",
+					"Asset",
+					"Payment Entry Reference",
+					"Payment Entry",
+				],
+			],
+			["fieldname", "like", "vmg_%"],
+		],
+	},
 	{"dt": "Property Setter", "filters": [["module", "=", "VMG Procurement"]]},
+	{"dt": "VMG Division"},
+	{"dt": "Terms and Conditions"},
 	{"dt": "Client Script", "filters": [["module", "=", "VMG Procurement"]]},
 	{"dt": "Server Script", "filters": [["module", "=", "VMG Procurement"]]},
 	{"dt": "Print Format", "filters": [["module", "=", "VMG Procurement"]]},
-	{"dt": "Role", "filters": [["name", "like", "VMG %"]]},
 	{"dt": "Workflow", "filters": [["document_type", "like", "VMG %"]]},
+	{
+		"dt": "Workflow State",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					"Draft",
+					"Pending Division Approval",
+					"Pending CFO Approval",
+					"Pending GM Approval",
+					"Pending Procurement Approval",
+					"Pending Procurement Verification",
+					"Pending Accounts Approval",
+					"Approved",
+					"Rejected",
+				],
+			]
+		],
+	},
+	{
+		"dt": "Workflow Action Master",
+		"filters": [["name", "in", ["Submit", "Approve", "Reject"]]],
+	},
+	{"dt": "Number Card", "filters": [["name", "like", "VMG %"]]},
+	{"dt": "Dashboard Chart", "filters": [["name", "like", "VMG %"]]},
 ]
 
 # Apps
@@ -154,36 +210,59 @@ fixtures = [
 
 # Document Events
 # ---------------
-# Hook on document methods and events
+# Routing guards and requisition status sync (step 04). The VMG RFQ / LPO
+# entries are inert until those DocTypes are built in steps 05 / 09.
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Material Request": {
+		"before_insert": "vmg_procurement.utils.asset_chain.set_asset_naming_series",
+		"validate": "vmg_procurement.utils.asset_chain.set_asset_naming_series",
+		"on_submit": "vmg_procurement.utils.routing.on_material_request_submit",
+		"on_cancel": "vmg_procurement.utils.routing.on_material_request_cancel",
+	},
+	"Supplier Quotation": {
+		"before_insert": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+		"validate": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+	},
+	"Purchase Order": {
+		"before_insert": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+		"validate": "vmg_procurement.utils.asset_chain.validate_purchase_order",
+		"on_submit": "vmg_procurement.utils.asset_chain.on_purchase_order_submit",
+		"on_cancel": "vmg_procurement.utils.asset_chain.on_purchase_order_cancel",
+	},
+	"Purchase Receipt": {
+		"before_insert": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+		"validate": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+		"on_submit": "vmg_procurement.utils.asset_chain.on_purchase_receipt_submit",
+	},
+	"Purchase Invoice": {
+		"before_insert": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+		"validate": "vmg_procurement.utils.asset_chain.apply_asset_chain_rules",
+	},
+	"Payment Entry": {
+		"validate": "vmg_procurement.utils.budget.check_payment_budget",
+		"on_submit": "vmg_procurement.vmg_procurement.doctype.vmg_supplier_invoice.vmg_supplier_invoice.on_payment_entry_change",
+		"on_cancel": "vmg_procurement.vmg_procurement.doctype.vmg_supplier_invoice.vmg_supplier_invoice.on_payment_entry_change",
+	},
+	"VMG Request for Quotation": {
+		"on_submit": "vmg_procurement.utils.routing.on_vmg_rfq_submit",
+		"on_cancel": "vmg_procurement.utils.routing.on_vmg_rfq_cancel",
+	},
+	"VMG Local Purchase Order": {
+		"on_submit": "vmg_procurement.utils.routing.on_vmg_lpo_submit",
+		"on_cancel": "vmg_procurement.utils.routing.on_vmg_lpo_cancel",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"vmg_procurement.tasks.all"
-# 	],
-# 	"daily": [
-# 		"vmg_procurement.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"vmg_procurement.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"vmg_procurement.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"vmg_procurement.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"vmg_procurement.vmg_procurement.doctype.vmg_supplier_quotation.vmg_supplier_quotation.mark_expired_quotations",
+		"vmg_procurement.vmg_procurement.doctype.vmg_supplier_invoice.vmg_supplier_invoice.update_payment_status_daily",
+	],
+}
 
 # Testing
 # -------
@@ -200,9 +279,9 @@ fixtures = [
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "vmg_procurement.task.get_dashboard_data"
-# }
+override_doctype_dashboards = {
+	"Supplier": "vmg_procurement.utils.dashboards.supplier_dashboard",
+}
 
 # exempt linked doctypes from being automatically cancelled
 #

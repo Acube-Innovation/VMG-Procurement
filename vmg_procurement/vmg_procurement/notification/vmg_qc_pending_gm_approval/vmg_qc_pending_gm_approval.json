@@ -1,0 +1,29 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "doc.workflow_state == \"Pending GM Approval\"",
+ "creation": "2026-08-03 21:00:00.000000",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "VMG Quotation Comparison",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<p>Quotation Comparison <b>{{ doc.name }}</b> is now <b>{{ doc.workflow_state }}</b>.</p>\n<ul>\n    <li>Purchase Requisition: {{ doc.purchase_requisition }}</li>\n    <li>Division: {{ doc.division }}</li>\n    <li>Selected Supplier: {{ doc.selected_supplier }}</li>\n    <li>Awarded Value: AED {{ frappe.utils.fmt_money(doc.awarded_value) }}</li>\n    <li>Selection Basis: {{ doc.selection_basis }}</li>\n{% if not doc.is_lowest_price and doc.justification %}    <li>Justification: {{ doc.justification }}</li>\n{% endif %}{% if doc.workflow_state == \"Rejected\" and doc.rejection_reason %}    <li>Rejection Reason: {{ doc.rejection_reason }}</li>\n{% endif %}</ul>\n<p><a href=\"{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}\">Open {{ doc.name }}</a></p>\n",
+ "modified": "2026-08-03 21:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG QC Pending GM Approval",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "VMG General Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "{{doc.name}} | {{doc.purchase_requisition}} | {{doc.selected_supplier}} | AED {{doc.awarded_value}} | {{doc.workflow_state}}",
+ "value_changed": "workflow_state"
+}

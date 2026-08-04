@@ -1,0 +1,29 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "doc.workflow_state == \"Pending GM Approval\"",
+ "creation": "2026-08-04 11:00:00.000000",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "VMG Local Purchase Order",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<p>Local Purchase Order <b>{{ doc.name }}</b> is now <b>{{ doc.workflow_state }}</b>.</p>\n<ul>\n    <li>Supplier: {{ doc.supplier_name or doc.supplier }}{% if doc.supplier_not_approved %} <b style=\"color: #b00\">(NOT on the Approved Supplier List)</b>{% endif %}</li>\n    <li>Division: {{ doc.division }} | Project / Job: {{ doc.project or doc.job_number }}</li>\n    <li>Order Route: {{ doc.order_route }}{% if doc.is_direct_order %} <b style=\"color: #b00\">(DIRECT ORDER - comparison skipped)</b>{% endif %}</li>\n    <li>Grand Total: AED {{ frappe.utils.fmt_money(doc.grand_total) }}</li>\n{% if doc.is_direct_order and doc.direct_order_justification %}    <li>Direct Order Justification: {{ doc.direct_order_justification }}</li>\n{% endif %}{% if doc.supplier_not_approved and doc.non_approved_supplier_justification %}    <li>Non Approved Supplier Justification: {{ doc.non_approved_supplier_justification }}</li>\n{% endif %}{% if doc.workflow_state == \"Rejected\" and doc.rejection_reason %}    <li>Rejection Reason: {{ doc.rejection_reason }}</li>\n{% endif %}</ul>\n<p><a href=\"{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}\">Open {{ doc.name }}</a></p>\n",
+ "modified": "2026-08-04 11:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG LPO Pending GM Approval",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "VMG General Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "{{doc.notification_flags}}{{doc.name}} | {{doc.supplier_name}} | AED {{doc.grand_total}} | {{doc.workflow_state}}",
+ "value_changed": "workflow_state"
+}
