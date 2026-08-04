@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "creation": "2026-08-04 13:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "description",
+  "uom",
+  "qty_section",
+  "ordered_qty",
+  "previously_received_qty",
+  "received_qty",
+  "column_break_qty",
+  "accepted_qty",
+  "rejected_qty",
+  "pending_qty",
+  "value_section",
+  "rate",
+  "amount",
+  "column_break_value",
+  "expense_account",
+  "remarks",
+  "lpo_item"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "columns": 3,
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "default": "Nos",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "qty_section",
+   "fieldtype": "Section Break",
+   "label": "Quantities"
+  },
+  {
+   "fieldname": "ordered_qty",
+   "fieldtype": "Float",
+   "label": "Ordered Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previously_received_qty",
+   "fieldtype": "Float",
+   "label": "Previously Received Qty",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "received_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Received Qty",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "accepted_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Accepted Qty",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "rejected_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Rejected Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pending_qty",
+   "fieldtype": "Float",
+   "label": "Pending Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "value_section",
+   "fieldtype": "Section Break",
+   "label": "Value"
+  },
+  {
+   "description": "Fetched from the order",
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "Rate",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "description": "Accepted qty x rate",
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_value",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expense_account",
+   "fieldtype": "Link",
+   "label": "Expense Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "lpo_item",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "LPO Item"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-04 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Purchase Receipt Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,593 @@
+{
+ "actions": [],
+ "creation": "2026-08-03 14:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_details_section",
+  "requisition_date",
+  "requisition_type",
+  "original_document",
+  "is_emergency",
+  "emergency_reference",
+  "column_break_request",
+  "required_by_date",
+  "source",
+  "charge_to_section",
+  "division",
+  "project",
+  "cost_center",
+  "column_break_charge",
+  "department",
+  "contract_reference_no",
+  "job_number",
+  "requested_by_section",
+  "requested_by",
+  "requester_employee",
+  "column_break_requested",
+  "site_engineer",
+  "division_manager",
+  "uniform_section",
+  "reason",
+  "column_break_uniform",
+  "reason_remarks",
+  "uniform_employees_break",
+  "uniform_employees",
+  "items_section",
+  "items",
+  "supplier_suggestion_section",
+  "proposed_supplier",
+  "column_break_supplier",
+  "is_new_product_or_service",
+  "section_break_lizm",
+  "existing_quotations",
+  "totals_section",
+  "total_qty",
+  "column_break_totals",
+  "total_estimated_value",
+  "office_use_section",
+  "procurement_remarks",
+  "approval_log_section",
+  "division_approved_by",
+  "division_approved_on",
+  "cfo_approved_by",
+  "cfo_approved_on",
+  "column_break_approval",
+  "gm_approved_by",
+  "gm_approved_on",
+  "rejection_reason",
+  "budget_section",
+  "budget_position",
+  "column_break_budget",
+  "budget_override_by",
+  "budget_override_on",
+  "status_section",
+  "status",
+  "workflow_state",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "request_details_section",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "requisition_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Requisition Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "required_by_date",
+   "fieldtype": "Date",
+   "label": "Required By Date",
+   "reqd": 1
+  },
+  {
+   "default": "Material",
+   "fieldname": "requisition_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Requisition Type",
+   "options": "Material\nService\nAsset\nStaff Uniform and PPE",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_request",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Site Online",
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Source",
+   "options": "Site Online\nProcurement Offline",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_emergency",
+   "fieldtype": "Check",
+   "label": "Is Emergency"
+  },
+  {
+   "depends_on": "eval:doc.is_emergency",
+   "fieldname": "emergency_reference",
+   "fieldtype": "Small Text",
+   "label": "Emergency Reference"
+  },
+  {
+   "fieldname": "original_document",
+   "fieldtype": "Attach",
+   "label": "Signed Copy or Email or WhatsApp Screenshot",
+   "mandatory_depends_on": "eval:doc.source == \"Procurement Offline\" || doc.is_emergency"
+  },
+  {
+   "fieldname": "charge_to_section",
+   "fieldtype": "Section Break",
+   "label": "Charge To"
+  },
+  {
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "division.default_project",
+   "fetch_if_empty": 1,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "division.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_charge",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "contract_reference_no",
+   "fieldtype": "Data",
+   "label": "Contract Reference No"
+  },
+  {
+   "fieldname": "job_number",
+   "fieldtype": "Data",
+   "label": "Job Number"
+  },
+  {
+   "fieldname": "requested_by_section",
+   "fieldtype": "Section Break",
+   "label": "Requested By"
+  },
+  {
+   "default": "__user",
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "label": "Requested By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "requester_employee",
+   "fieldtype": "Link",
+   "label": "Requester Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_requested",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "division.site_engineer",
+   "fieldname": "site_engineer",
+   "fieldtype": "Link",
+   "label": "Site Engineer",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "division.division_manager",
+   "fieldname": "division_manager",
+   "fieldtype": "Link",
+   "label": "Division Manager",
+   "options": "Employee"
+  },
+  {
+   "collapsible": 0,
+   "depends_on": "eval:doc.requisition_type === 'Staff Uniform and PPE'",
+   "fieldname": "uniform_section",
+   "fieldtype": "Section Break",
+   "label": "Staff Uniform Details"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Reason",
+   "options": "\nNew Joiner\nReplacement\nDamaged\nLost\nAdditional Issue\nSite Requirement",
+   "depends_on": "eval:doc.requisition_type === 'Staff Uniform and PPE'",
+   "mandatory_depends_on": "eval:doc.requisition_type === 'Staff Uniform and PPE'"
+  },
+  {
+   "fieldname": "column_break_uniform",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reason_remarks",
+   "fieldtype": "Small Text",
+   "label": "Reason Remarks",
+   "depends_on": "eval:doc.requisition_type === 'Staff Uniform and PPE'"
+  },
+  {
+   "fieldname": "uniform_employees_break",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "depends_on": "eval:doc.requisition_type === 'Staff Uniform and PPE'"
+  },
+  {
+   "description": "One row per employee and item; the requisition items below are rebuilt from these rows on save",
+   "fieldname": "uniform_employees",
+   "fieldtype": "Table",
+   "label": "Uniform Employees",
+   "options": "VMG Uniform Request Item",
+   "depends_on": "eval:doc.requisition_type === 'Staff Uniform and PPE'"
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG Purchase Requisition Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_suggestion_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier Suggestion"
+  },
+  {
+   "fieldname": "proposed_supplier",
+   "fieldtype": "Link",
+   "label": "Proposed Supplier",
+   "options": "Supplier"
+  },
+  {
+   "default": "0",
+   "description": "Tick if this product or service is being bought for the first time. Three quotations will then be required even below the threshold.",
+   "fieldname": "is_new_product_or_service",
+   "fieldtype": "Check",
+   "label": "Is New Product or Service"
+  },
+  {
+   "fieldname": "column_break_supplier",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "existing_quotations",
+   "fieldtype": "Table",
+   "label": "Existing Quotations",
+   "options": "VMG Requisition Attachment"
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_estimated_value",
+   "fieldtype": "Currency",
+   "label": "Total Estimated Value (AED)",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "office_use_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use Only"
+  },
+  {
+   "description": "Filled by the Procurement Department (Remarks box on form VMG-PRO-F01)",
+   "fieldname": "procurement_remarks",
+   "fieldtype": "Small Text",
+   "label": "Procurement Remarks",
+   "no_copy": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "approval_log_section",
+   "fieldtype": "Section Break",
+   "label": "Approval Log"
+  },
+  {
+   "fieldname": "division_approved_by",
+   "fieldtype": "Link",
+   "label": "Division Approved By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "division_approved_on",
+   "fieldtype": "Datetime",
+   "label": "Division Approved On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "cfo_approved_by",
+   "fieldtype": "Link",
+   "label": "CFO Approved By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cfo_approved_on",
+   "fieldtype": "Datetime",
+   "label": "CFO Approved On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gm_approved_by",
+   "fieldtype": "Link",
+   "label": "GM Approved By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gm_approved_on",
+   "fieldtype": "Datetime",
+   "label": "GM Approved On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "Mandatory when rejecting: visible to the requester",
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "mandatory_depends_on": "eval:doc.workflow_state == \"Rejected\"",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nPending Approval\nApproved\nRejected\nRFQ Created\nOrdered\nPartially Ordered\nClosed\nCancelled",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Workflow State",
+   "no_copy": 1,
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG Purchase Requisition",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "budget_section",
+   "fieldtype": "Section Break",
+   "label": "Budget"
+  },
+  {
+   "fieldname": "budget_position",
+   "fieldtype": "Small Text",
+   "label": "Budget Position",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_budget",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "budget_override_by",
+   "fieldtype": "Link",
+   "label": "Budget Override By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "budget_override_on",
+   "fieldtype": "Datetime",
+   "label": "Budget Override On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_lizm",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-06 17:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Purchase Requisition",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Site User",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG CFO",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG General Manager",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "division,requisition_type,status,requested_by",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

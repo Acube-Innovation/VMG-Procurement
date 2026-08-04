@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "creation": "2026-08-03 19:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "description",
+  "brand_or_make",
+  "quantity_section",
+  "qty",
+  "uom",
+  "column_break_qty",
+  "rate",
+  "amount",
+  "more_section",
+  "delivery_days",
+  "column_break_more",
+  "remarks",
+  "rfq_item",
+  "requisition_item"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "item_code.description",
+   "fetch_if_empty": 1,
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "columns": 4,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "brand_or_make",
+   "fieldtype": "Data",
+   "label": "Brand or Make"
+  },
+  {
+   "fieldname": "quantity_section",
+   "fieldtype": "Section Break",
+   "label": "Quantity and Rate"
+  },
+  {
+   "default": "1",
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 1,
+   "label": "Qty",
+   "reqd": 1
+  },
+  {
+   "default": "Nos",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "columns": 1,
+   "label": "UOM",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "columns": 2,
+   "label": "Rate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "columns": 2,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "more_section",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "delivery_days",
+   "fieldtype": "Int",
+   "label": "Delivery Days"
+  },
+  {
+   "fieldname": "column_break_more",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "rfq_item",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "RFQ Item"
+  },
+  {
+   "fieldname": "requisition_item",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Requisition Item"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-03 19:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Supplier Quotation Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

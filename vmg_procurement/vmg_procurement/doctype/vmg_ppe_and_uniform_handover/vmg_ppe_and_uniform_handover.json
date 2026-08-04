@@ -1,0 +1,249 @@
+{
+ "actions": [],
+ "creation": "2026-08-04 18:00:00.000000",
+ "default_print_format": "VMG PPE and Uniform Handover VMG-PRO-F07",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "handover_date",
+  "division",
+  "project",
+  "cost_center",
+  "column_break_details",
+  "purchase_requisition",
+  "purchase_receipt",
+  "issued_by",
+  "items_section",
+  "items",
+  "closing_section",
+  "acknowledgement_attachment",
+  "forwarded_to_procurement_on",
+  "column_break_closing",
+  "remarks",
+  "status",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "handover_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Handover Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "division.default_project",
+   "fetch_if_empty": 1,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "division.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "purchase_requisition",
+   "fieldtype": "Link",
+   "label": "Purchase Requisition",
+   "options": "VMG Purchase Requisition"
+  },
+  {
+   "fieldname": "purchase_receipt",
+   "fieldtype": "Link",
+   "label": "Purchase Receipt",
+   "options": "VMG Purchase Receipt"
+  },
+  {
+   "fieldname": "issued_by",
+   "fieldtype": "Link",
+   "label": "Site In Charge",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG PPE Handover Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "closing_section",
+   "fieldtype": "Section Break",
+   "label": "Closing"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "acknowledgement_attachment",
+   "fieldtype": "Attach",
+   "label": "Signed Handover Copy"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "forwarded_to_procurement_on",
+   "fieldtype": "Date",
+   "label": "Forwarded to Procurement On"
+  },
+  {
+   "fieldname": "column_break_closing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nIssued\nAcknowledged\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG PPE and Uniform Handover",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-06 17:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG PPE and Uniform Handover",
+ "naming_rule": "",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Site User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Site Engineer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User"
+  }
+ ],
+ "search_fields": "division,purchase_requisition,issued_by,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

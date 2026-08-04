@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "creation": "2026-08-03 20:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_no",
+  "supplier",
+  "supplier_name",
+  "supplier_quotation",
+  "quotation_ref",
+  "quotation_date",
+  "items_quoted",
+  "column_break_main",
+  "grand_total",
+  "delivery_days",
+  "payment_terms",
+  "valid_till",
+  "flags_section",
+  "is_approved_supplier",
+  "is_lowest_total",
+  "is_selected"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_no",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 1,
+   "label": "Column",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2,
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier_quotation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "columns": 2,
+   "label": "Supplier Quotation",
+   "options": "VMG Supplier Quotation",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier_quotation.supplier_quotation_ref",
+   "fieldname": "quotation_ref",
+   "fieldtype": "Data",
+   "label": "Quotation Ref",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supplier_quotation.supplier_quotation_date",
+   "fieldname": "quotation_date",
+   "fieldtype": "Date",
+   "label": "Quotation Date",
+   "read_only": 1
+  },
+  {
+   "description": "Quoted RFQ lines / total RFQ lines; (+n) counts alternative lines not on the RFQ",
+   "fieldname": "items_quoted",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 1,
+   "label": "Items Quoted",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier_quotation.grand_total",
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "columns": 2,
+   "label": "Grand Total (AED)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supplier_quotation.delivery_days",
+   "fieldname": "delivery_days",
+   "fieldtype": "Int",
+   "label": "Delivery Days"
+  },
+  {
+   "fetch_from": "supplier_quotation.payment_terms",
+   "fieldname": "payment_terms",
+   "fieldtype": "Small Text",
+   "label": "Payment Terms"
+  },
+  {
+   "fetch_from": "supplier_quotation.valid_till",
+   "fieldname": "valid_till",
+   "fieldtype": "Date",
+   "label": "Valid Till",
+   "read_only": 1
+  },
+  {
+   "fieldname": "flags_section",
+   "fieldtype": "Section Break",
+   "label": "Flags"
+  },
+  {
+   "default": "0",
+   "fetch_from": "supplier.vmg_is_approved",
+   "fieldname": "is_approved_supplier",
+   "fieldtype": "Check",
+   "label": "Approved Supplier",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_lowest_total",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 1,
+   "label": "Lowest Total",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_selected",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 1,
+   "label": "Selected"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-05 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Comparison Supplier",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

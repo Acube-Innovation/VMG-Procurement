@@ -1,0 +1,83 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 20:56:32.508428",
+  "name": "Pending Procurement Verification",
+  "style": "Warning",
+  "workflow_state_name": "Pending Procurement Verification"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 20:56:32.538872",
+  "name": "Pending Accounts Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Accounts Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 20:34:10.341871",
+  "name": "Pending Procurement Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Procurement Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 16:20:57.554013",
+  "name": "Pending GM Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending GM Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2024-11-17 15:42:05.545104",
+  "name": "Approved",
+  "style": "Success",
+  "workflow_state_name": "Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "remove",
+  "modified": "2024-12-18 13:00:49.229308",
+  "name": "Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 16:18:59.820943",
+  "name": "Pending Division Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Division Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 16:18:59.850920",
+  "name": "Pending CFO Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending CFO Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 16:20:57.542882",
+  "name": "Draft",
+  "style": "Danger",
+  "workflow_state_name": "Draft"
+ }
+]

@@ -1,0 +1,424 @@
+{
+ "actions": [],
+ "creation": "2026-08-04 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "posting_date",
+  "supplier",
+  "supplier_invoice_no",
+  "supplier_invoice_date",
+  "invoice_attachment",
+  "column_break_details",
+  "local_purchase_order",
+  "purchase_receipt",
+  "purchase_requisition",
+  "division",
+  "project",
+  "cost_center",
+  "company",
+  "items_section",
+  "items",
+  "totals_section",
+  "total",
+  "discount_amount",
+  "net_total",
+  "column_break_totals",
+  "vat_rate",
+  "vat_amount",
+  "input_vat_account",
+  "grand_total",
+  "in_words",
+  "payment_section",
+  "credit_to",
+  "payment_terms_template",
+  "column_break_payment",
+  "due_date",
+  "outstanding_amount",
+  "advance_paid",
+  "accounting_section",
+  "journal_entry",
+  "column_break_accounting",
+  "posting_status",
+  "status_section",
+  "status",
+  "workflow_state",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "local_purchase_order.supplier",
+   "fetch_if_empty": 1,
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_invoice_no",
+   "fieldtype": "Data",
+   "label": "Supplier Invoice No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_invoice_date",
+   "fieldtype": "Date",
+   "label": "Supplier Invoice Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_attachment",
+   "fieldtype": "Attach",
+   "label": "Original Invoice",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "local_purchase_order",
+   "fieldtype": "Link",
+   "label": "Local Purchase Order",
+   "options": "VMG Local Purchase Order",
+   "read_only_depends_on": "eval:doc.local_purchase_order"
+  },
+  {
+   "fieldname": "purchase_receipt",
+   "fieldtype": "Link",
+   "label": "Purchase Receipt",
+   "options": "VMG Purchase Receipt",
+   "read_only_depends_on": "eval:doc.purchase_receipt"
+  },
+  {
+   "fetch_from": "local_purchase_order.purchase_requisition",
+   "fieldname": "purchase_requisition",
+   "fieldtype": "Link",
+   "label": "Purchase Requisition",
+   "options": "VMG Purchase Requisition",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "local_purchase_order.division",
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "read_only_depends_on": "eval:doc.local_purchase_order",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "local_purchase_order.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "local_purchase_order.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG Supplier Invoice Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Amount"
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "label": "Net Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "5",
+   "fieldname": "vat_rate",
+   "fieldtype": "Percent",
+   "label": "VAT Rate (%)"
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "label": "VAT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "input_vat_account",
+   "fieldtype": "Link",
+   "label": "Input VAT Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Grand Total (AED)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "in_words",
+   "fieldtype": "Data",
+   "label": "In Words",
+   "length": 240,
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "credit_to",
+   "fieldtype": "Link",
+   "label": "Supplier Credit Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_terms_template",
+   "fieldtype": "Link",
+   "label": "Payment Terms Template",
+   "options": "Payment Terms Template"
+  },
+  {
+   "fieldname": "column_break_payment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Due Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "Outstanding Amount",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "advance_paid",
+   "fieldtype": "Currency",
+   "label": "Advance Paid",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "accounting_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting"
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "Journal Entry",
+   "no_copy": 1,
+   "options": "Journal Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_accounting",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Not Posted",
+   "fieldname": "posting_status",
+   "fieldtype": "Select",
+   "label": "Posting Status",
+   "no_copy": 1,
+   "options": "Not Posted\nPosted\nReversed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nPending Approval\nApproved\nUnpaid\nPartly Paid\nPaid\nOverdue\nCancelled",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Workflow State",
+   "no_copy": 1,
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG Supplier Invoice",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-04 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Supplier Invoice",
+ "naming_rule": "",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG CFO",
+   "submit": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG General Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager"
+  }
+ ],
+ "search_fields": "supplier,supplier_invoice_no,local_purchase_order,division,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

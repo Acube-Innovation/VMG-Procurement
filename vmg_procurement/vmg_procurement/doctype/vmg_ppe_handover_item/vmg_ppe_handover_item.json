@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "creation": "2026-08-04 18:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "designation",
+  "item_section",
+  "item_type",
+  "item_code",
+  "size",
+  "column_break_item",
+  "qty",
+  "issue_date",
+  "ack_section",
+  "employee_acknowledged",
+  "acknowledgement_date",
+  "column_break_ack",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_section",
+   "fieldtype": "Section Break",
+   "label": "Item"
+  },
+  {
+   "columns": 2,
+   "fieldname": "item_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Item Type",
+   "options": "Uniform Shirt\nUniform Trouser\nCoverall\nSafety Shoes\nSafety Helmet\nSafety Glasses\nGloves\nHigh Visibility Vest\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "columns": 1,
+   "fieldname": "size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Size"
+  },
+  {
+   "fieldname": "column_break_item",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "default": "1",
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty",
+   "reqd": 1
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date"
+  },
+  {
+   "fieldname": "ack_section",
+   "fieldtype": "Section Break",
+   "label": "Acknowledgement"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "default": "0",
+   "fieldname": "employee_acknowledged",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Employee Acknowledged"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "acknowledgement_date",
+   "fieldtype": "Date",
+   "label": "Acknowledgement Date"
+  },
+  {
+   "fieldname": "column_break_ack",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-04 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG PPE Handover Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

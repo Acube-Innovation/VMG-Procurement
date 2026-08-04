@@ -1,0 +1,368 @@
+{
+ "actions": [],
+ "creation": "2026-08-03 19:00:00.000000",
+ "default_print_format": "VMG Supplier Quotation",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "supplier",
+  "supplier_name",
+  "request_for_quotation",
+  "purchase_requisition",
+  "division",
+  "column_break_details",
+  "project",
+  "cost_center",
+  "transaction_date",
+  "valid_till",
+  "reference_section",
+  "supplier_quotation_ref",
+  "supplier_quotation_date",
+  "column_break_reference",
+  "quotation_attachment",
+  "items_section",
+  "items",
+  "commercial_section",
+  "delivery_days",
+  "payment_terms",
+  "warranty",
+  "column_break_commercial",
+  "incoterm_or_delivery_place",
+  "is_approved_supplier",
+  "totals_section",
+  "total",
+  "discount_amount",
+  "net_total",
+  "column_break_totals",
+  "vat_rate",
+  "vat_amount",
+  "grand_total",
+  "in_words",
+  "status_section",
+  "status",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "request_for_quotation",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Request for Quotation",
+   "options": "VMG Request for Quotation",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "request_for_quotation.purchase_requisition",
+   "fieldname": "purchase_requisition",
+   "fieldtype": "Link",
+   "label": "Purchase Requisition",
+   "options": "VMG Purchase Requisition",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "request_for_quotation.division",
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "request_for_quotation.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "request_for_quotation.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "valid_till",
+   "fieldtype": "Date",
+   "label": "Valid Till"
+  },
+  {
+   "fieldname": "reference_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier Reference"
+  },
+  {
+   "fieldname": "supplier_quotation_ref",
+   "fieldtype": "Data",
+   "label": "Supplier Quotation Number"
+  },
+  {
+   "fieldname": "supplier_quotation_date",
+   "fieldtype": "Date",
+   "label": "Supplier Quotation Date"
+  },
+  {
+   "fieldname": "column_break_reference",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quotation_attachment",
+   "fieldtype": "Attach",
+   "label": "Original Quotation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG Supplier Quotation Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "commercial_section",
+   "fieldtype": "Section Break",
+   "label": "Commercial Terms"
+  },
+  {
+   "fieldname": "delivery_days",
+   "fieldtype": "Int",
+   "label": "Delivery Time in Days"
+  },
+  {
+   "fieldname": "payment_terms",
+   "fieldtype": "Small Text",
+   "label": "Payment Terms"
+  },
+  {
+   "fieldname": "warranty",
+   "fieldtype": "Small Text",
+   "label": "Warranty"
+  },
+  {
+   "fieldname": "column_break_commercial",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "incoterm_or_delivery_place",
+   "fieldtype": "Data",
+   "label": "Incoterm or Delivery Place"
+  },
+  {
+   "default": "0",
+   "fetch_from": "supplier.vmg_is_approved",
+   "fieldname": "is_approved_supplier",
+   "fieldtype": "Check",
+   "label": "Approved Supplier",
+   "read_only": 1
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Amount"
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "label": "Net Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "5",
+   "fieldname": "vat_rate",
+   "fieldtype": "Percent",
+   "label": "VAT Rate (%)"
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "label": "VAT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Grand Total (AED)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "in_words",
+   "fieldtype": "Data",
+   "label": "In Words",
+   "length": 240,
+   "read_only": 1
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nSubmitted\nSelected\nNot Selected\nExpired\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG Supplier Quotation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-03 19:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Supplier Quotation",
+ "naming_rule": "",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG CFO"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG General Manager"
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User"
+  }
+ ],
+ "search_fields": "supplier,request_for_quotation,division,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

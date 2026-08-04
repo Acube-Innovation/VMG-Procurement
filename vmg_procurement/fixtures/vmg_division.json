@@ -1,0 +1,58 @@
+[
+ {
+  "cost_center": "Valve - VMG",
+  "default_project": null,
+  "division_manager": null,
+  "division_name": "Valve",
+  "division_type": "Division",
+  "docstatus": 0,
+  "doctype": "VMG Division",
+  "is_active": 1,
+  "modified": "2026-08-03 12:30:58.515117",
+  "name": "Valve",
+  "prefix": "VLV",
+  "site_engineer": null
+ },
+ {
+  "cost_center": "Scaffolding - VMG",
+  "default_project": null,
+  "division_manager": null,
+  "division_name": "Scaffolding",
+  "division_type": "Division",
+  "docstatus": 0,
+  "doctype": "VMG Division",
+  "is_active": 1,
+  "modified": "2026-08-03 12:30:58.572056",
+  "name": "Scaffolding",
+  "prefix": "SCF",
+  "site_engineer": null
+ },
+ {
+  "cost_center": "Rental - VMG",
+  "default_project": null,
+  "division_manager": null,
+  "division_name": "Rental",
+  "division_type": "Division",
+  "docstatus": 0,
+  "doctype": "VMG Division",
+  "is_active": 1,
+  "modified": "2026-08-03 12:30:58.577489",
+  "name": "Rental",
+  "prefix": "RNT",
+  "site_engineer": null
+ },
+ {
+  "cost_center": "Enterprise - VMG",
+  "default_project": null,
+  "division_manager": null,
+  "division_name": "Enterprise",
+  "division_type": "Division",
+  "docstatus": 0,
+  "doctype": "VMG Division",
+  "is_active": 1,
+  "modified": "2026-08-03 12:30:58.575418",
+  "name": "Enterprise",
+  "prefix": "ENT",
+  "site_engineer": null
+ }
+]

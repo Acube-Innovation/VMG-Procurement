@@ -1,0 +1,629 @@
+{
+ "actions": [],
+ "creation": "2026-08-04 10:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "order_details_section",
+  "order_date",
+  "supplier",
+  "supplier_name",
+  "division",
+  "cost_center",
+  "column_break_details",
+  "project",
+  "job_number",
+  "required_delivery_date",
+  "delivery_week_number",
+  "service_visit_date",
+  "addresses_section",
+  "delivery_address",
+  "delivery_address_display",
+  "supplier_contact",
+  "contact_display",
+  "column_break_addresses",
+  "invoicing_address",
+  "invoicing_address_display",
+  "source_section",
+  "order_route",
+  "quotation_comparison",
+  "supplier_quotation",
+  "purchase_requisition",
+  "column_break_source",
+  "is_direct_order",
+  "direct_order_justification",
+  "supplier_not_approved",
+  "non_approved_supplier_justification",
+  "items_section",
+  "items",
+  "totals_section",
+  "total",
+  "discount_amount",
+  "net_total",
+  "column_break_totals",
+  "vat_rate",
+  "vat_amount",
+  "grand_total",
+  "in_words",
+  "terms_section",
+  "terms_template",
+  "terms",
+  "approval_log_section",
+  "cfo_approved_by",
+  "cfo_approved_on",
+  "rejection_reason",
+  "column_break_approval",
+  "gm_approved_by",
+  "gm_approved_on",
+  "supplier_issue_section",
+  "sent_to_supplier_on",
+  "sent_by",
+  "column_break_issue",
+  "notification_flags",
+  "budget_section",
+  "budget_position",
+  "column_break_budget",
+  "budget_override_by",
+  "budget_override_on",
+  "status_section",
+  "status",
+  "workflow_state",
+  "column_break_zuru",
+  "per_received",
+  "per_billed",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "order_details_section",
+   "fieldtype": "Section Break",
+   "label": "Order Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "order_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Order Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "job_number",
+   "fieldtype": "Data",
+   "label": "Job Number"
+  },
+  {
+   "fetch_from": "division.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center",
+   "reqd": 1
+  },
+  {
+   "description": "Either this or the Service Visit Date is mandatory",
+   "fieldname": "required_delivery_date",
+   "fieldtype": "Date",
+   "label": "Required Delivery Date",
+   "mandatory_depends_on": "eval:!doc.service_visit_date"
+  },
+  {
+   "description": "Computed from the delivery date; editable",
+   "fieldname": "delivery_week_number",
+   "fieldtype": "Data",
+   "label": "Week Number"
+  },
+  {
+   "fieldname": "service_visit_date",
+   "fieldtype": "Date",
+   "label": "Service Visit Date"
+  },
+  {
+   "fieldname": "addresses_section",
+   "fieldtype": "Section Break",
+   "label": "Addresses"
+  },
+  {
+   "fieldname": "delivery_address",
+   "fieldtype": "Link",
+   "label": "Delivery Address",
+   "options": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_address_display",
+   "fieldtype": "Small Text",
+   "label": "Delivery Address Display",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier_contact",
+   "fieldtype": "Link",
+   "label": "Supplier Contact",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "contact_display",
+   "fieldtype": "Small Text",
+   "label": "Contact Display",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_addresses",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "invoicing_address",
+   "fieldtype": "Link",
+   "label": "Invoicing Address",
+   "options": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoicing_address_display",
+   "fieldtype": "Small Text",
+   "label": "Invoicing Address Display",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source"
+  },
+  {
+   "fieldname": "quotation_comparison",
+   "fieldtype": "Link",
+   "label": "Quotation Comparison",
+   "options": "VMG Quotation Comparison",
+   "read_only_depends_on": "eval:doc.quotation_comparison"
+  },
+  {
+   "fieldname": "supplier_quotation",
+   "fieldtype": "Link",
+   "label": "Supplier Quotation",
+   "options": "VMG Supplier Quotation",
+   "read_only_depends_on": "eval:doc.supplier_quotation"
+  },
+  {
+   "fieldname": "purchase_requisition",
+   "fieldtype": "Link",
+   "label": "Purchase Requisition",
+   "options": "VMG Purchase Requisition",
+   "read_only_depends_on": "eval:doc.purchase_requisition"
+  },
+  {
+   "fieldname": "column_break_source",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "order_route",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Order Route",
+   "options": "\nFrom Comparison\nDirect Order\nRepeat Order",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_direct_order",
+   "fieldtype": "Check",
+   "label": "Is Direct Order",
+   "read_only": 1
+  },
+  {
+   "description": "Why the quotation comparison stage was skipped",
+   "fieldname": "direct_order_justification",
+   "fieldtype": "Small Text",
+   "label": "Direct Order Justification",
+   "mandatory_depends_on": "eval:doc.is_direct_order"
+  },
+  {
+   "default": "0",
+   "fieldname": "supplier_not_approved",
+   "fieldtype": "Check",
+   "label": "Supplier Not Approved",
+   "read_only": 1
+  },
+  {
+   "fieldname": "non_approved_supplier_justification",
+   "fieldtype": "Small Text",
+   "label": "Non Approved Supplier Justification",
+   "mandatory_depends_on": "eval:doc.supplier_not_approved"
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG LPO Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Amount"
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "label": "Net Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "5",
+   "fieldname": "vat_rate",
+   "fieldtype": "Percent",
+   "label": "VAT Rate (%)"
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "label": "VAT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Grand Total (AED)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "in_words",
+   "fieldtype": "Data",
+   "label": "In Words",
+   "length": 240,
+   "read_only": 1
+  },
+  {
+   "fieldname": "terms_section",
+   "fieldtype": "Section Break",
+   "label": "Terms"
+  },
+  {
+   "fieldname": "terms_template",
+   "fieldtype": "Link",
+   "label": "Terms Template",
+   "options": "Terms and Conditions"
+  },
+  {
+   "fetch_from": "terms_template.terms",
+   "fetch_if_empty": 1,
+   "fieldname": "terms",
+   "fieldtype": "Text Editor",
+   "label": "Terms and Conditions"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nPending Approval\nApproved\nRejected\nTo Receive\nPartially Received\nFully Received\nTo Bill\nCompleted\nClosed\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "per_received",
+   "fieldtype": "Percent",
+   "label": "Received (%)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "per_billed",
+   "fieldtype": "Percent",
+   "label": "Billed (%)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Workflow State",
+   "no_copy": 1,
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG Local Purchase Order",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "approval_log_section",
+   "fieldtype": "Section Break",
+   "label": "Approval Log"
+  },
+  {
+   "fieldname": "cfo_approved_by",
+   "fieldtype": "Link",
+   "label": "CFO Approved By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cfo_approved_on",
+   "fieldtype": "Datetime",
+   "label": "CFO Approved On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gm_approved_by",
+   "fieldtype": "Link",
+   "label": "GM Approved By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gm_approved_on",
+   "fieldtype": "Datetime",
+   "label": "GM Approved On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "Mandatory when rejecting",
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "mandatory_depends_on": "eval:doc.workflow_state == \"Rejected\"",
+   "no_copy": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "supplier_issue_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier Issue"
+  },
+  {
+   "fieldname": "sent_to_supplier_on",
+   "fieldtype": "Datetime",
+   "label": "Sent to Supplier On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_issue",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sent_by",
+   "fieldtype": "Link",
+   "label": "Sent By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "description": "Computed prefix (DIRECT ORDER / NON APPROVED SUPPLIER) for workflow notification subjects",
+   "fieldname": "notification_flags",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Notification Flags",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "budget_section",
+   "fieldtype": "Section Break",
+   "label": "Budget"
+  },
+  {
+   "fieldname": "budget_position",
+   "fieldtype": "Small Text",
+   "label": "Budget Position",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_budget",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "budget_override_by",
+   "fieldtype": "Link",
+   "label": "Budget Override By",
+   "no_copy": 1,
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "budget_override_on",
+   "fieldtype": "Datetime",
+   "label": "Budget Override On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zuru",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-04 19:17:11.977734",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Local Purchase Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG CFO",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG General Manager",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User",
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "supplier,division,order_route,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

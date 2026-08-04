@@ -1,0 +1,264 @@
+{
+ "charts": [
+  {
+   "chart_name": "VMG Budget Utilisation by Project",
+   "label": "VMG Budget Utilisation by Project"
+  }
+ ],
+ "content": "[{\"id\":\"vmgpx001\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>VMG Procurement</b></span>\",\"col\":12}},{\"id\":\"vmgpxbudchart\",\"type\":\"chart\",\"data\":{\"chart_name\":\"VMG Budget Utilisation by Project\",\"col\":12}},{\"id\":\"vmgpx006\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"vmgpx007\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\">Documents</span>\",\"col\":12}},{\"id\":\"vmgpx008\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Purchase Requisition\",\"col\":3}},{\"id\":\"vmgpx009\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Request for Quotation\",\"col\":3}},{\"id\":\"vmgpx010\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Supplier Quotation\",\"col\":3}},{\"id\":\"vmgpx011\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Quotation Comparison\",\"col\":3}},{\"id\":\"vmgpx012\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Local Purchase Order\",\"col\":3}},{\"id\":\"vmgpx013\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Purchase Receipt\",\"col\":3}},{\"id\":\"vmgpx014\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Supplier Invoice\",\"col\":3}},{\"id\":\"vmgpxsc_bud\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VMG Project Budget\",\"col\":3}},{\"id\":\"vmgpx015\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"vmgpx017\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"vmgpx016\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"f9imSJfCzG\",\"type\":\"card\",\"data\":{\"card_name\":\"Other Reports\",\"col\":4}},{\"id\":\"vmgpxspacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
+ "creation": "2026-08-04 16:00:00",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "buying",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "VMG Procurement",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Terms and Conditions",
+   "link_count": 0,
+   "link_to": "Terms and Conditions",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "VMG Procurement Settings",
+   "link_count": 0,
+   "link_to": "VMG Procurement Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "VMG Division",
+   "link_count": 0,
+   "link_to": "VMG Division",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "VMG Project Budget",
+   "link_count": 0,
+   "link_to": "VMG Project Budget",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "PPE Issue History",
+   "link_count": 0,
+   "link_to": "PPE Issue History",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "VMG Project Budget Utilisation",
+   "link_count": 0,
+   "link_to": "VMG Project Budget Utilisation",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Purchase Order Log",
+   "link_count": 0,
+   "link_to": "Purchase Order Log",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "VMG Supplier Outstanding",
+   "link_count": 0,
+   "link_to": "VMG Supplier Outstanding",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Procurement Cycle Register",
+   "link_count": 0,
+   "link_to": "Procurement Cycle Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Other Reports",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Pending Approvals",
+   "link_count": 0,
+   "link_to": "Pending Approvals",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quotation Analysis",
+   "link_count": 0,
+   "link_to": "Quotation Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "VMG Quotation Comparison",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Emergency and Direct Order Register",
+   "link_count": 0,
+   "link_to": "Emergency and Direct Order Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "VMG Purchase Requisition",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Approved Suppliers List",
+   "link_count": 0,
+   "link_to": "Approved Suppliers List",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Supplier",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Procurement Register",
+   "link_count": 0,
+   "link_to": "Asset Procurement Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Asset",
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-04 19:10:12.557471",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Procurement",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 99.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "label": "VMG Purchase Requisition",
+   "link_to": "VMG Purchase Requisition",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "label": "VMG Request for Quotation",
+   "link_to": "VMG Request for Quotation",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "label": "VMG Supplier Quotation",
+   "link_to": "VMG Supplier Quotation",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "label": "VMG Quotation Comparison",
+   "link_to": "VMG Quotation Comparison",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "label": "VMG Local Purchase Order",
+   "link_to": "VMG Local Purchase Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "label": "VMG Purchase Receipt",
+   "link_to": "VMG Purchase Receipt",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "label": "VMG Supplier Invoice",
+   "link_to": "VMG Supplier Invoice",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "label": "VMG Project Budget",
+   "link_to": "VMG Project Budget",
+   "type": "DocType"
+  }
+ ],
+ "title": "VMG Procurement"
+}

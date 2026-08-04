@@ -1,0 +1,396 @@
+{
+ "actions": [],
+ "creation": "2026-08-04 13:00:00.000000",
+ "default_print_format": "VMG Purchase Receipt",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "receipt_date",
+  "supplier",
+  "local_purchase_order",
+  "purchase_requisition",
+  "division",
+  "column_break_details",
+  "project",
+  "cost_center",
+  "received_at_site",
+  "received_by",
+  "is_partial",
+  "delivery_note_section",
+  "supplier_delivery_note_no",
+  "supplier_delivery_note_date",
+  "column_break_dn",
+  "delivery_note_attachment",
+  "items_section",
+  "items",
+  "totals_section",
+  "total",
+  "column_break_totals",
+  "vat_amount",
+  "grand_total",
+  "acceptance_section",
+  "acceptance_status",
+  "rejection_reason",
+  "column_break_acceptance",
+  "inspected_by",
+  "inspection_remarks",
+  "status_section",
+  "status",
+  "workflow_state",
+  "per_billed",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "receipt_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Receipt Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "local_purchase_order.supplier",
+   "fetch_if_empty": 1,
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "local_purchase_order",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Local Purchase Order",
+   "options": "VMG Local Purchase Order",
+   "read_only_depends_on": "eval:doc.local_purchase_order"
+  },
+  {
+   "fetch_from": "local_purchase_order.purchase_requisition",
+   "fieldname": "purchase_requisition",
+   "fieldtype": "Link",
+   "label": "Purchase Requisition",
+   "options": "VMG Purchase Requisition",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "local_purchase_order.division",
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Division",
+   "options": "VMG Division",
+   "read_only_depends_on": "eval:doc.local_purchase_order",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "local_purchase_order.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "read_only_depends_on": "eval:doc.local_purchase_order"
+  },
+  {
+   "fetch_from": "local_purchase_order.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center",
+   "read_only_depends_on": "eval:doc.local_purchase_order"
+  },
+  {
+   "fieldname": "received_at_site",
+   "fieldtype": "Data",
+   "label": "Received at Site"
+  },
+  {
+   "fieldname": "received_by",
+   "fieldtype": "Link",
+   "label": "Received By",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_partial",
+   "fieldtype": "Check",
+   "label": "Is Partial",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_note_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier Delivery Note"
+  },
+  {
+   "fieldname": "supplier_delivery_note_no",
+   "fieldtype": "Data",
+   "label": "Supplier Delivery Note Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_delivery_note_date",
+   "fieldtype": "Date",
+   "label": "Supplier Delivery Note Date"
+  },
+  {
+   "fieldname": "column_break_dn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Mandatory before the receipt can be submitted for approval",
+   "fieldname": "delivery_note_attachment",
+   "fieldtype": "Attach",
+   "label": "Signed Delivery Note"
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "VMG Purchase Receipt Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals (Accepted Value)"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "label": "VAT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total (AED)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "acceptance_section",
+   "fieldtype": "Section Break",
+   "label": "Acceptance"
+  },
+  {
+   "fieldname": "acceptance_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Acceptance Status",
+   "options": "Pending\nAccepted\nPartially Accepted\nRejected",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "Mandatory whenever any quantity is rejected",
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "mandatory_depends_on": "eval:[\"Partially Accepted\", \"Rejected\"].includes(doc.acceptance_status)"
+  },
+  {
+   "fieldname": "column_break_acceptance",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inspected_by",
+   "fieldtype": "Link",
+   "label": "Inspected By",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "inspection_remarks",
+   "fieldtype": "Small Text",
+   "label": "Inspection Remarks"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nPending Approval\nApproved\nRejected\nTo Bill\nBilled\nCancelled",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Workflow State",
+   "no_copy": 1,
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "per_billed",
+   "fieldtype": "Percent",
+   "label": "Billed (%)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "VMG Purchase Receipt",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-04 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Purchase Receipt",
+ "naming_rule": "",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Procurement User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Site User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Site Engineer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Division Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG Accounts User"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG CFO"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "VMG General Manager"
+  }
+ ],
+ "search_fields": "supplier,local_purchase_order,division,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

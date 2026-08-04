@@ -1,0 +1,286 @@
+{
+ "actions": [],
+ "creation": "2026-08-03 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "quotation_rules_section",
+  "quote_threshold_amount",
+  "min_suppliers_above_threshold",
+  "min_suppliers_for_new_item",
+  "column_break_quotation",
+  "threshold_enforcement",
+  "max_suppliers_in_comparison",
+  "defaults_section",
+  "default_terms",
+  "terms_mandatory_on_lpo",
+  "default_currency",
+  "column_break_defaults",
+  "default_payable_account",
+  "default_input_vat_account",
+  "default_expense_account",
+  "default_tax_template",
+  "over_receipt_tolerance_percent",
+  "uniform_reissue_months",
+  "rfq_default_message",
+  "invoice_matching_section",
+  "rate_tolerance_percent",
+  "qty_tolerance_percent",
+  "column_break_matching",
+  "invoice_matching_action",
+  "budget_control_section",
+  "budget_action_on_requisition",
+  "column_break_budget_1",
+  "budget_action_on_lpo",
+  "column_break_budget_2",
+  "budget_action_on_payment",
+  "approvals_section",
+  "requisition_approvers",
+  "lpo_approvers",
+  "notify_by_email"
+ ],
+ "fields": [
+  {
+   "fieldname": "quotation_rules_section",
+   "fieldtype": "Section Break",
+   "label": "Quotation Rules"
+  },
+  {
+   "default": "1000",
+   "description": "Net amount above which the minimum supplier quotation rules apply",
+   "fieldname": "quote_threshold_amount",
+   "fieldtype": "Currency",
+   "label": "Quote Threshold Amount"
+  },
+  {
+   "default": "3",
+   "fieldname": "min_suppliers_above_threshold",
+   "fieldtype": "Int",
+   "label": "Minimum Suppliers Above Threshold"
+  },
+  {
+   "default": "3",
+   "fieldname": "min_suppliers_for_new_item",
+   "fieldtype": "Int",
+   "label": "Minimum Suppliers for New Item"
+  },
+  {
+   "fieldname": "column_break_quotation",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Warn",
+   "description": "What happens when the minimum supplier quotation rules are not met",
+   "fieldname": "threshold_enforcement",
+   "fieldtype": "Select",
+   "label": "Threshold Enforcement",
+   "options": "Ignore\nWarn\nStop"
+  },
+  {
+   "default": "5",
+   "fieldname": "max_suppliers_in_comparison",
+   "fieldtype": "Int",
+   "label": "Maximum Suppliers in Comparison"
+  },
+  {
+   "fieldname": "defaults_section",
+   "fieldtype": "Section Break",
+   "label": "Defaults"
+  },
+  {
+   "fieldname": "default_terms",
+   "fieldtype": "Link",
+   "label": "Default Terms and Conditions",
+   "options": "Terms and Conditions"
+  },
+  {
+   "default": "1",
+   "fieldname": "terms_mandatory_on_lpo",
+   "fieldtype": "Check",
+   "label": "Terms Mandatory on LPO"
+  },
+  {
+   "default": "AED",
+   "fieldname": "default_currency",
+   "fieldtype": "Link",
+   "label": "Default Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "column_break_defaults",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_payable_account",
+   "fieldtype": "Link",
+   "label": "Default Payable Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_expense_account",
+   "fieldtype": "Link",
+   "label": "Default Expense Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_tax_template",
+   "fieldtype": "Link",
+   "label": "Default Tax Template",
+   "options": "Purchase Taxes and Charges Template"
+  },
+  {
+   "default": "0",
+   "description": "How far a receipt may exceed the ordered quantity, in percent",
+   "fieldname": "over_receipt_tolerance_percent",
+   "fieldtype": "Percent",
+   "label": "Over Receipt Tolerance (%)"
+  },
+  {
+   "description": "Default email body for supplier enquiries sent from a VMG Request for Quotation",
+   "fieldname": "rfq_default_message",
+   "fieldtype": "Text Editor",
+   "label": "RFQ Default Message to Supplier"
+  },
+  {
+   "fieldname": "budget_control_section",
+   "fieldtype": "Section Break",
+   "label": "Budget Control"
+  },
+  {
+   "default": "Warn",
+   "fieldname": "budget_action_on_requisition",
+   "fieldtype": "Select",
+   "label": "Budget Action on Requisition",
+   "options": "Ignore\nWarn\nStop"
+  },
+  {
+   "fieldname": "column_break_budget_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Warn",
+   "fieldname": "budget_action_on_lpo",
+   "fieldtype": "Select",
+   "label": "Budget Action on LPO",
+   "options": "Ignore\nWarn\nStop"
+  },
+  {
+   "fieldname": "column_break_budget_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Warn",
+   "fieldname": "budget_action_on_payment",
+   "fieldtype": "Select",
+   "label": "Budget Action on Payment",
+   "options": "Ignore\nWarn\nStop"
+  },
+  {
+   "fieldname": "approvals_section",
+   "fieldtype": "Section Break",
+   "label": "Approvals"
+  },
+  {
+   "fieldname": "requisition_approvers",
+   "fieldtype": "Table MultiSelect",
+   "label": "Requisition Approvers",
+   "options": "VMG Approver Role"
+  },
+  {
+   "fieldname": "lpo_approvers",
+   "fieldtype": "Table MultiSelect",
+   "label": "LPO Approvers",
+   "options": "VMG Approver Role"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_by_email",
+   "fieldtype": "Check",
+   "label": "Notify by Email"
+  },
+  {
+   "description": "Debited with the VAT amount when posting supplier invoices",
+   "fieldname": "default_input_vat_account",
+   "fieldtype": "Link",
+   "label": "Default Input VAT Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "invoice_matching_section",
+   "fieldtype": "Section Break",
+   "label": "Invoice Matching"
+  },
+  {
+   "default": "0",
+   "description": "Allowed deviation of the invoice rate from the ordered rate",
+   "fieldname": "rate_tolerance_percent",
+   "fieldtype": "Percent",
+   "label": "Rate Tolerance (%)"
+  },
+  {
+   "default": "0",
+   "description": "Allowed deviation of the invoice quantity from the accepted quantity",
+   "fieldname": "qty_tolerance_percent",
+   "fieldtype": "Percent",
+   "label": "Qty Tolerance (%)"
+  },
+  {
+   "fieldname": "column_break_matching",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Warn",
+   "fieldname": "invoice_matching_action",
+   "fieldtype": "Select",
+   "label": "Invoice Matching Action",
+   "options": "Warn\nStop"
+  },
+  {
+   "default": "12",
+   "description": "Warn when the same item type is issued to an employee again within this many months",
+   "fieldname": "uniform_reissue_months",
+   "fieldtype": "Int",
+   "label": "Uniform Reissue Period (Months)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-04 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VMG Procurement",
+ "name": "VMG Procurement Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "VMG Procurement Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "VMG CFO"
+  },
+  {
+   "read": 1,
+   "role": "VMG General Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

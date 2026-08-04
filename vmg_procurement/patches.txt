@@ -4,3 +4,17 @@
 
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
+vmg_procurement.patches.v0_1.seed_divisions
+vmg_procurement.patches.v0_1.initialise_procurement_settings
+vmg_procurement.patches.v0_1.link_division_cost_centers
+vmg_procurement.patches.v0_1.create_pr_approval_workflow
+vmg_procurement.patches.v0_1.set_rfq_default_message
+vmg_procurement.patches.v0_1.create_qc_approval_workflow
+vmg_procurement.patches.v0_1.create_default_lpo_terms
+vmg_procurement.patches.v0_1.create_lpo_approval_workflow
+vmg_procurement.patches.v0_1.create_fixed_assets_item_group
+vmg_procurement.patches.v0_1.create_grn_approval_workflow
+vmg_procurement.patches.v0_1.create_sinv_approval_workflow
+vmg_procurement.patches.v0_1.create_vmg_number_cards
+vmg_procurement.patches.v0_1.create_budget_workspace_items
+vmg_procurement.patches.v0_1.merge_uniform_requests_into_requisitions
