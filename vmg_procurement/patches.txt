@@ -18,3 +18,6 @@ vmg_procurement.patches.v0_1.create_sinv_approval_workflow
 vmg_procurement.patches.v0_1.create_vmg_number_cards
 vmg_procurement.patches.v0_1.create_budget_workspace_items
 vmg_procurement.patches.v0_1.merge_uniform_requests_into_requisitions
+vmg_procurement.patches.v0_1.drop_qc_division_approval
+vmg_procurement.patches.v0_1.rename_qc_submit_action
+vmg_procurement.patches.v0_1.drop_grn_procurement_approval

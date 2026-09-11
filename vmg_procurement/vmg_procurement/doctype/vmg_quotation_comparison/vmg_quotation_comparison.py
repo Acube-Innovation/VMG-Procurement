@@ -11,19 +11,21 @@ from vmg_procurement.utils.settings import get_settings
 
 MAX_COLUMNS = 5  # fixed column design of VMG Comparison Item (VMG-PRO-F02)
 
+# A comparison is approved by the CFO and then the GM. The Division Manager was
+# dropped from this chain by patches/v0_1/drop_qc_division_approval.py, which
+# also moves any document parked on that state over to the CFO -- so no live
+# document can still report "Pending Division Approval".
 WORKFLOW_STATE_TO_STATUS = {
-	"Pending Division Approval": "Pending Approval",
 	"Pending CFO Approval": "Pending Approval",
 	"Pending GM Approval": "Pending Approval",
 	"Approved": "Approved",
 	"Rejected": "Rejected",
 }
 
+# `division_approved_by` / `division_approved_on` are deliberately left on the
+# doctype: comparisons approved before the change carry those stamps and the
+# audit trail should stay readable. Nothing writes them any more.
 APPROVAL_STAMPS = {
-	("Pending Division Approval", "Pending CFO Approval"): (
-		"division_approved_by",
-		"division_approved_on",
-	),
 	("Pending CFO Approval", "Pending GM Approval"): ("cfo_approved_by", "cfo_approved_on"),
 	("Pending GM Approval", "Approved"): ("gm_approved_by", "gm_approved_on"),
 }
