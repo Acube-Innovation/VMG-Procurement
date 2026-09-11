@@ -74,7 +74,7 @@ fixtures = [
 	},
 	{
 		"dt": "Workflow Action Master",
-		"filters": [["name", "in", ["Submit", "Approve", "Reject"]]],
+		"filters": [["name", "in", ["Submit", "Approve", "Reject", "Forward to CFO"]]],
 	},
 	{"dt": "Number Card", "filters": [["name", "like", "VMG %"]]},
 	{"dt": "Dashboard Chart", "filters": [["name", "like", "VMG %"]]},

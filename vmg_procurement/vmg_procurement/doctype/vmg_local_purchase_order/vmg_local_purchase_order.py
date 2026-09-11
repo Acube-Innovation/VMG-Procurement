@@ -1,9 +1,15 @@
 # Copyright (c) 2026, VMG and contributors
 # For license information, please see license.txt
 
+from typing import NamedTuple
+
 import frappe
 from frappe import _
-from frappe.contacts.doctype.address.address import get_address_display
+from frappe.contacts.doctype.address.address import (
+	get_address_display,
+	get_default_address,
+	get_preferred_address,
+)
 from frappe.model.document import Document
 from frappe.utils import cint, flt, getdate, money_in_words
 
@@ -12,6 +18,39 @@ from vmg_procurement.utils.routing import DIRECT_ORDER_ROLE
 from vmg_procurement.utils.settings import get_settings
 
 PRINT_FORMAT = "VMG Local Purchase Order VMG-PRO-F04"
+
+
+class AddressSlot(NamedTuple):
+	"""One address on the order: the link, its read-only rendering, the fields
+	used to type a new one, and which Address flag makes it the supplier's
+	default for that purpose."""
+
+	link_field: str
+	display_field: str
+	prefix: str
+	address_type: str
+	preferred_key: str
+	label: str
+
+
+ADDRESS_SLOTS = (
+	AddressSlot(
+		"delivery_address",
+		"delivery_address_display",
+		"new_delivery_address",
+		"Shipping",
+		"is_shipping_address",
+		"Delivery Address",
+	),
+	AddressSlot(
+		"invoicing_address",
+		"invoicing_address_display",
+		"new_invoicing_address",
+		"Billing",
+		"is_primary_address",
+		"Invoicing Address",
+	),
+)
 
 WORKFLOW_STATE_TO_STATUS = {
 	"Pending CFO Approval": "Pending Approval",
@@ -42,6 +81,7 @@ class VMGLocalPurchaseOrder(Document):
 		self.validate_unapproved_supplier_route()
 		self.set_required_date_from_requisition()
 		self.set_week_number()
+		self.set_addresses_from_supplier()
 		self.set_address_displays()
 		self.set_terms_defaults()
 		self.set_item_defaults()
@@ -56,6 +96,10 @@ class VMGLocalPurchaseOrder(Document):
 		self.suppress_notifications_if_disabled()
 
 	def before_submit(self):
+		# runs after validate, so the address exists before the rest of the
+		# submit checks look at it
+		self.create_addresses_if_needed()
+		self.validate_addresses()
 		self.validate_mandatory_policy_fields()
 		self.validate_justifications()
 		self.validate_terms()
@@ -238,6 +282,79 @@ class VMGLocalPurchaseOrder(Document):
 		anchor = self.required_delivery_date or self.service_visit_date
 		if anchor and not self.delivery_week_number:
 			self.delivery_week_number = f"WK{getdate(anchor).isocalendar()[1]:02d}"
+
+	def set_addresses_from_supplier(self):
+		"""Pick up the supplier's own addresses when none have been chosen.
+
+		Mirrors what the form does on the client, so an order created by API or
+		by `make_local_purchase_order` gets the same defaults.
+		"""
+		if not self.supplier:
+			return
+		for slot in ADDRESS_SLOTS:
+			if self.get(slot.link_field):
+				continue
+			self.set(
+				slot.link_field, get_supplier_default_address(self.supplier, slot.preferred_key)
+			)
+
+	def create_addresses_if_needed(self):
+		"""Turn address lines typed on the order into real Address documents.
+
+		A supplier nobody has ordered from yet has no Address on file, so the
+		lines are captured on the order itself and become an Address linked to
+		the supplier on submit. The next order for that supplier finds it.
+		"""
+		if not self.supplier:
+			return
+
+		created = False
+		for slot in ADDRESS_SLOTS:
+			if self.get(slot.link_field):
+				continue
+			line1 = (self.get(f"{slot.prefix}_line1") or "").strip()
+			if not line1:
+				continue  # validate_addresses reports this
+
+			address = frappe.get_doc(
+				{
+					"doctype": "Address",
+					"address_title": self.supplier_name or self.supplier,
+					"address_type": slot.address_type,
+					"address_line1": line1,
+					"address_line2": (self.get(f"{slot.prefix}_line2") or "").strip(),
+					"city": (self.get(f"{slot.prefix}_city") or "").strip(),
+					"state": (self.get(f"{slot.prefix}_state") or "").strip(),
+					"pincode": (self.get(f"{slot.prefix}_pincode") or "").strip(),
+					"country": self.get(f"{slot.prefix}_country"),
+					slot.preferred_key: 1,
+					"links": [{"link_doctype": "Supplier", "link_name": self.supplier}],
+				}
+			).insert(ignore_permissions=True)
+
+			self.set(slot.link_field, address.name)
+			# the address now lives as its own document; keep one copy, not two
+			for part in ("line1", "line2", "city", "state", "pincode", "country"):
+				self.set(f"{slot.prefix}_{part}", None)
+			created = True
+
+		if created:
+			self.set_address_displays()
+
+	def validate_addresses(self):
+		for slot in ADDRESS_SLOTS:
+			if self.get(slot.link_field):
+				continue
+			frappe.throw(
+				_(
+					"Select {0}, or fill in its Address Line 1 and one will be created"
+					" against {1}."
+				).format(
+					frappe.bold(_(slot.label)),
+					frappe.bold(self.supplier_name or self.supplier or _("the supplier")),
+				),
+				title=_("{0} Required").format(_(slot.label)),
+			)
 
 	def set_address_displays(self):
 		self.delivery_address_display = (
@@ -451,6 +568,29 @@ class VMGLocalPurchaseOrder(Document):
 		self.is_direct_order = 0
 		self.set_item_defaults()
 		self.calculate_totals()
+
+
+@frappe.whitelist()
+def get_supplier_default_address(supplier, preferred_key="is_shipping_address"):
+	"""The supplier's address for one purpose on the order.
+
+	Delivery prefers the supplier's shipping address, invoicing prefers its
+	primary one; either falls back to the other flag and then to any address
+	linked to the supplier. Returns None when the supplier has none on file,
+	which is what puts the address lines on the order itself.
+	"""
+	if not supplier:
+		return None
+	if preferred_key not in ("is_shipping_address", "is_primary_address"):
+		preferred_key = "is_shipping_address"
+	other_key = (
+		"is_primary_address" if preferred_key == "is_shipping_address" else "is_shipping_address"
+	)
+	return (
+		get_preferred_address("Supplier", supplier, preferred_key)
+		or get_preferred_address("Supplier", supplier, other_key)
+		or get_default_address("Supplier", supplier, preferred_key)
+	)
 
 
 @frappe.whitelist()

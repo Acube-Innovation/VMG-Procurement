@@ -19,11 +19,23 @@
   "addresses_section",
   "delivery_address",
   "delivery_address_display",
+  "new_delivery_address_line1",
+  "new_delivery_address_line2",
+  "new_delivery_address_city",
+  "new_delivery_address_state",
+  "new_delivery_address_pincode",
+  "new_delivery_address_country",
   "supplier_contact",
   "contact_display",
   "column_break_addresses",
   "invoicing_address",
   "invoicing_address_display",
+  "new_invoicing_address_line1",
+  "new_invoicing_address_line2",
+  "new_invoicing_address_city",
+  "new_invoicing_address_state",
+  "new_invoicing_address_pincode",
+  "new_invoicing_address_country",
   "source_section",
   "order_route",
   "quotation_comparison",
@@ -159,11 +171,11 @@
    "label": "Addresses"
   },
   {
+   "description": "Defaults to the supplier's address. Leave empty and fill the address lines below to create one.",
    "fieldname": "delivery_address",
    "fieldtype": "Link",
    "label": "Delivery Address",
-   "options": "Address",
-   "reqd": 1
+   "options": "Address"
   },
   {
    "fieldname": "delivery_address_display",
@@ -188,11 +200,11 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "Defaults to the supplier's address. Leave empty and fill the address lines below to create one.",
    "fieldname": "invoicing_address",
    "fieldtype": "Link",
    "label": "Invoicing Address",
-   "options": "Address",
-   "reqd": 1
+   "options": "Address"
   },
   {
    "fieldname": "invoicing_address_display",
@@ -515,6 +527,84 @@
   {
    "fieldname": "column_break_zuru",
    "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:!doc.delivery_address",
+   "description": "No delivery address is on file for this supplier. Fill this in and an Address will be created against the supplier when the order is submitted.",
+   "fieldname": "new_delivery_address_line1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "depends_on": "eval:!doc.delivery_address",
+   "fieldname": "new_delivery_address_line2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "depends_on": "eval:!doc.delivery_address",
+   "fieldname": "new_delivery_address_city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "depends_on": "eval:!doc.delivery_address",
+   "fieldname": "new_delivery_address_state",
+   "fieldtype": "Data",
+   "label": "State / Emirate"
+  },
+  {
+   "depends_on": "eval:!doc.delivery_address",
+   "fieldname": "new_delivery_address_pincode",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "default": "United Arab Emirates",
+   "depends_on": "eval:!doc.delivery_address",
+   "fieldname": "new_delivery_address_country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "depends_on": "eval:!doc.invoicing_address",
+   "description": "No invoicing address is on file for this supplier. Fill this in and an Address will be created against the supplier when the order is submitted.",
+   "fieldname": "new_invoicing_address_line1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "depends_on": "eval:!doc.invoicing_address",
+   "fieldname": "new_invoicing_address_line2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "depends_on": "eval:!doc.invoicing_address",
+   "fieldname": "new_invoicing_address_city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "depends_on": "eval:!doc.invoicing_address",
+   "fieldname": "new_invoicing_address_state",
+   "fieldtype": "Data",
+   "label": "State / Emirate"
+  },
+  {
+   "depends_on": "eval:!doc.invoicing_address",
+   "fieldname": "new_invoicing_address_pincode",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "default": "United Arab Emirates",
+   "depends_on": "eval:!doc.invoicing_address",
+   "fieldname": "new_invoicing_address_country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
   }
  ],
  "index_web_pages_for_search": 1,

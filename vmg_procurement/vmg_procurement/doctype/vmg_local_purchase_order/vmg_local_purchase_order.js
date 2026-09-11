@@ -1,6 +1,20 @@
 // Copyright (c) 2026, VMG and contributors
 // For license information, please see license.txt
 
+// Mirrors ADDRESS_SLOTS in vmg_local_purchase_order.py.
+const ADDRESS_SLOTS = [
+	{
+		link_field: "delivery_address",
+		display_field: "delivery_address_display",
+		preferred_key: "is_shipping_address",
+	},
+	{
+		link_field: "invoicing_address",
+		display_field: "invoicing_address_display",
+		preferred_key: "is_primary_address",
+	},
+];
+
 frappe.ui.form.on("VMG Local Purchase Order", {
 	onload(frm) {
 		// mapped drafts (from comparison / requisition / repeat order) arrive
@@ -14,10 +28,31 @@ frappe.ui.form.on("VMG Local Purchase Order", {
 		apply_default_expense_account(frm, [locals[cdt][cdn]]);
 	},
 
+	supplier(frm) {
+		// delivery wants the supplier's shipping address, invoicing its primary
+		// one; an address already on the order (a repeat order, say) wins
+		ADDRESS_SLOTS.forEach((slot) => fill_default_address(frm, slot));
+	},
+
+	delivery_address(frm) {
+		set_address_display(frm, "delivery_address", "delivery_address_display");
+	},
+
+	invoicing_address(frm) {
+		set_address_display(frm, "invoicing_address", "invoicing_address_display");
+	},
+
 	refresh(frm) {
 		frm.set_query("expense_account", "items", () => ({
 			filters: { root_type: "Expense", is_group: 0 },
 		}));
+		// only ever offer addresses that belong to the supplier
+		["delivery_address", "invoicing_address"].forEach((field) => {
+			frm.set_query(field, () => ({
+				query: "frappe.contacts.doctype.address.address.address_query",
+				filters: { link_doctype: "Supplier", link_name: frm.doc.supplier || "" },
+			}));
+		});
 		if (frm.doc.docstatus === 0 && !frm.is_new()) {
 			frm.add_custom_button(__("Get Items from Previous Order"), () => {
 				if (!frm.doc.supplier) {
@@ -151,6 +186,38 @@ function set_week_number(frm) {
 
 // Default Expense Account from VMG Procurement Settings, applied to draft
 // rows that have none (the server applies the same default again on save)
+// Pull the supplier's default address into one slot, leaving it empty when the
+// supplier has none on file: the address lines on the form then take over.
+function fill_default_address(frm, slot) {
+	if (!frm.doc.supplier || frm.doc[slot.link_field]) return;
+	frappe.call({
+		method:
+			"vmg_procurement.vmg_procurement.doctype.vmg_local_purchase_order" +
+			".vmg_local_purchase_order.get_supplier_default_address",
+		args: { supplier: frm.doc.supplier, preferred_key: slot.preferred_key },
+		callback(r) {
+			if (r.message) frm.set_value(slot.link_field, r.message);
+		},
+	});
+}
+
+// Render the chosen address into its read-only text area straight away, rather
+// than waiting for the server to fill it in on save.
+function set_address_display(frm, link_field, display_field) {
+	const address = frm.doc[link_field];
+	if (!address) {
+		frm.set_value(display_field, "");
+		return;
+	}
+	frappe.call({
+		method: "frappe.contacts.doctype.address.address.get_address_display",
+		args: { address_dict: address },
+		callback(r) {
+			frm.set_value(display_field, r.message || "");
+		},
+	});
+}
+
 function apply_default_expense_account(frm, rows) {
 	if (frm.doc.docstatus !== 0 || !rows.length) {
 		return;

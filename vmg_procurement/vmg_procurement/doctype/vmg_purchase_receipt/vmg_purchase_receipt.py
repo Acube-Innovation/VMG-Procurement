@@ -12,8 +12,11 @@ from vmg_procurement.vmg_procurement.doctype.vmg_local_purchase_order.vmg_local_
 	validate_lpo_ready_for_receipt,
 )
 
+# Submitting a receipt goes straight to Approved: procurement approval was
+# dropped by patches/v0_1/drop_grn_procurement_approval.py, since receiving is a
+# record of what arrived rather than a decision. "Rejected" is kept because the
+# state is still defined on the workflow, but nothing routes to it today.
 WORKFLOW_STATE_TO_STATUS = {
-	"Pending Procurement Approval": "Pending Approval",
 	"Approved": "To Bill",
 	"Rejected": "Rejected",
 }
@@ -73,13 +76,19 @@ class VMGPurchaseReceipt(Document):
 		self.suppress_notifications_if_disabled()
 
 	def on_update_after_submit(self):
+		self.sync_status_with_workflow_state()
+
+	def on_submit(self):
+		# Submitting lands straight on Approved now that procurement approval is
+		# gone, so the status has to come from the workflow state. Hardcoding
+		# "Pending Approval" here left submitted receipts unbillable.
+		self.sync_status_with_workflow_state()
+		update_lpo_receipt_status(self.local_purchase_order)
+
+	def sync_status_with_workflow_state(self):
 		status = WORKFLOW_STATE_TO_STATUS.get(self.workflow_state)
 		if status and self.status != status:
 			self.db_set("status", status, update_modified=False)
-
-	def on_submit(self):
-		self.db_set("status", "Pending Approval", update_modified=False)
-		update_lpo_receipt_status(self.local_purchase_order)
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled", update_modified=False)
