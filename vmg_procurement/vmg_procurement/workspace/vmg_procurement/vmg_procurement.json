@@ -15,7 +15,7 @@
  "icon": "buying",
  "idx": 0,
  "is_hidden": 0,
- "label": "VMG Procurement",
+ "label": "Procurement",
  "links": [
   {
    "hidden": 0,
@@ -199,10 +199,10 @@
    "type": "Link"
   }
  ],
- "modified": "2026-08-04 19:10:12.557471",
+ "modified": "2026-09-17 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "VMG Procurement",
- "name": "VMG Procurement",
+ "name": "Procurement",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
@@ -260,5 +260,5 @@
    "type": "DocType"
   }
  ],
- "title": "VMG Procurement"
+ "title": "Procurement"
 }
